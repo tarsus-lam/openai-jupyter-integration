@@ -1,0 +1,61 @@
+Cell Type,Gene,Score,Adjusted P-value
+Mitochondrial-associated cells,FTL,63.4149,0.0
+Mitochondrial-associated cells,GPX2,58.62296,0.0
+Mitochondrial-associated cells,ALDH3A1,57.936687,0.0
+Mitochondrial-associated cells,AKR1B10,54.83062,0.0
+Mitochondrial-associated cells,FTH1,50.812634,0.0
+Mitochondrial-associated cells,AKR1C2,50.18201,0.0
+Mitochondrial-associated cells,AKR1C3,47.561733,0.0
+Mitochondrial-associated cells,AGR2,47.495743,0.0
+Mitochondrial-associated cells,TXN,47.338158,0.0
+Mitochondrial-associated cells,NQO1,44.478317,0.0
+Metabolic active cells,NTS,62.666405,0.0
+Metabolic active cells,CPS1,27.717283,1.0773136008097329e-139
+Metabolic active cells,PRELID1,24.976667,1.2807637786799926e-116
+Metabolic active cells,ANXA1,24.346634,1.8447220195297116e-112
+Metabolic active cells,ALX1,23.979906,6.976521220171883e-107
+Metabolic active cells,NHP2,22.593824,1.1824671067507622e-98
+Metabolic active cells,LINC02762,22.534517,6.23902873873739e-95
+Metabolic active cells,LAMTOR5,22.371944,1.0289864087910942e-97
+Metabolic active cells,GAPDH,22.22783,1.058599837272717e-93
+Metabolic active cells,RACK1,21.613054,5.594275378331854e-89
+Transcriptionally active cells,MT-CO3,92.81277,0.0
+Transcriptionally active cells,MT-ND1,90.23533,0.0
+Transcriptionally active cells,MT-ATP6,88.97461,0.0
+Transcriptionally active cells,MT-CO2,86.69232,0.0
+Transcriptionally active cells,MT-ND3,86.07327,0.0
+Transcriptionally active cells,MT-CO1,83.27283,0.0
+Transcriptionally active cells,MT-ND4,81.92143,0.0
+Transcriptionally active cells,MT-CYB,81.81175,0.0
+Transcriptionally active cells,MT-ND5,77.685875,0.0
+Transcriptionally active cells,MTRNR2L12,74.19743,0.0
+Long non-coding RNA expressing cells,PMEPA1,54.314266,0.0
+Long non-coding RNA expressing cells,TPM1,53.363056,0.0
+Long non-coding RNA expressing cells,TAGLN,46.161823,0.0
+Long non-coding RNA expressing cells,CAV1,45.938,0.0
+Long non-coding RNA expressing cells,TPM2,43.61039,0.0
+Long non-coding RNA expressing cells,TGFBI,42.59354,0.0
+Long non-coding RNA expressing cells,ACTG1,42.186348,0.0
+Long non-coding RNA expressing cells,RPL28,40.641808,0.0
+Long non-coding RNA expressing cells,TMSB4X,38.031555,1.8826804990674238e-273
+Long non-coding RNA expressing cells,RDX,38.00601,1.1014518453123665e-281
+Secretory cells,ALDH1A1,7.902213,2.5428145586563897e-11
+Secretory cells,TMSB4X,7.6145654,1.8549062951398107e-10
+Secretory cells,RPS19,5.9983535,3.763391199477551e-07
+Secretory cells,KRT18,5.687011,1.5031577516867906e-06
+Secretory cells,RPLP1,5.2599907,9.388436778088204e-06
+Secretory cells,FTH1,4.4342885,0.0002547748624593179
+Secretory cells,RPL13A,4.2240186,0.00047521177784244504
+Secretory cells,RPL41,4.071747,0.0008132620873924165
+Secretory cells,RPS14,3.8149142,0.0018122282311755803
+Secretory cells,RPS2,3.6063275,0.003464522574327052
+Cell cycle and proliferation cells,CDC42EP3,3.762093,1.0
+Cell cycle and proliferation cells,DERL1,3.5508313,1.0
+Cell cycle and proliferation cells,AC009318.1,3.2858467,1.0
+Cell cycle and proliferation cells,COIL,3.261349,1.0
+Cell cycle and proliferation cells,CHCHD6,3.2493408,1.0
+Cell cycle and proliferation cells,IRF3,3.2486842,1.0
+Cell cycle and proliferation cells,UBALD2,3.1987343,1.0
+Cell cycle and proliferation cells,AC005775.1,3.1955767,1.0
+Cell cycle and proliferation cells,ALDH16A1,3.108333,1.0
+Cell cycle and proliferation cells,TCEAL4,3.0838704,1.0

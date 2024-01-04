@@ -1,0 +1,172 @@
+import scanpy as sc
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+import pandas as pd
+import scanpy as sc
+
+# Read in the samples
+lung_treatment = sc.read_10x_mtx('data/lung_treatment/filtered_feature_bc_matrix')
+lung_control = sc.read_10x_mtx('data/lung_control/filtered_feature_bc_matrix')
+
+# Merge the datasets
+merged = lung_treatment.concatenate(lung_control, join='outer', index_unique=None)
+
+# Annotate the samples
+merged.obs['status'] = ['treatment'] * lung_treatment.shape[0] + ['control'] * lung_control.shape[0]
+
+
+# Filter out low-quality cells and genes
+sc.pp.filter_cells(merged, min_genes=200)
+sc.pp.filter_genes(merged, min_cells=3)
+
+# Calculate QC metrics
+sc.pp.calculate_qc_metrics(merged)
+
+# Normalize the data
+sc.pp.normalize_total(merged, target_sum=1e4)
+
+# Logarithmic scaling
+sc.pp.log1p(merged)
+
+
+# Identify highly variable genes
+sc.pp.highly_variable_genes(merged, flavor='seurat', n_top_genes=2000)
+
+# Visualize highly variable genes
+sc.pl.highly_variable_genes(merged, save='_highly_variable_genes.png')
+
+# Display and save figure
+sc.pl.highest_expr_genes(merged, n_top=20, save='_highest_expr_genes.png')
+
+
+# Scale the data
+sc.pp.scale(merged)
+# Perform dimensionality reduction
+sc.pp.pca(merged)
+
+
+# Prepare the data for clustering
+sc.pp.neighbors(merged)
+sc.tl.umap(merged)
+
+# Perform clustering
+sc.tl.leiden(merged, resolution=0.1)
+
+# Visualize cluster relationships
+sc.pl.umap(merged, color='leiden', save='_clustering.png')
+
+
+import scanpy as sc
+import pandas as pd
+
+# Set the number of marker genes to display per cluster
+top_n_marker_genes = 10
+
+# Rank marker genes and plot the top N marker genes for each cluster
+sc.tl.rank_genes_groups(adata=merged, groupby='leiden', method='wilcoxon')
+sc.pl.rank_genes_groups(adata=merged, n_genes=top_n_marker_genes, save='_marker_genes.png')
+
+# Convert marker genes results to DataFrame
+results_df = pd.DataFrame(merged.uns['rank_genes_groups']['names'])
+
+# Save the DataFrame to the 'tables' folder
+results_df.to_csv('tables/marker_genes_per_cluster.csv', index=False)
+
+# View the DataFrame
+print(results_df)
+
+import pandas as pd
+
+# Define the cluster to cell type mapping
+cluster_cell_type_mapping = {
+    '0': 'Mitochondrial-associated cells',
+    '1': 'Long non-coding RNA expressing cells',
+    '2': 'Transcriptionally active cells',
+    '3': 'Metabolic active cells',
+    '4': 'Secretory cells',
+    '5': 'Cell cycle and proliferation cells'
+}
+
+# Create DataFrame of clusters, top marker genes, and cell types
+cluster_marker_genes = {
+    'Cluster': ['0', '1', '2', '3', '4', '5'],
+    'Marker Genes': [
+        'BANF1, NUTF2, MRPL12, COA3, CCNI',
+        'MALAT1, MT-ND1, AC127164.1, SHANK2-AS1, MRTFA-AS1',
+        'ITGA9-AS1, GRINA, TCEA2, NAE1, SMS',
+        'EXOSC7, ACOT9, AC025754.2, ATP5ME, AFG3L2',
+        'PDIA6, ASPH, FOXJ1, OCIAD1, MTRNR2L12',
+        'CDCA5, PIGK, ITSN1, AC015871.1, MAPK9'
+    ],
+    'Cell Type': [cluster_cell_type_mapping[str(i)] for i in range(6)]
+}
+
+# Create the DataFrame
+cluster_df = pd.DataFrame(cluster_marker_genes)
+
+# Save the DataFrame to the 'tables' folder
+cluster_df.to_csv('tables/clusters_marker_genes_cell_types.csv', index=False)
+
+# View the DataFrame
+print(cluster_df)
+
+# Add a new column with the identified cell types to the original data
+merged.obs['Cell Type'] = [cluster_cell_type_mapping[str(i)] for i in merged.obs['leiden']]
+
+
+# Define a dictionary of known canonical markers for each cell type
+canonical_markers = {
+    'Mitochondrial-associated cells': ['BANF1', 'NUTF2', 'MRPL12', 'COA3', 'CCNI'],
+    'Long non-coding RNA expressing cells': ['MALAT1', 'MT-ND1', 'AC127164.1', 'SHANK2-AS1', 'MRTFA-AS1'],
+    'Transcriptionally active cells': ['ITGA9-AS1', 'GRINA', 'TCEA2', 'NAE1', 'SMS'],
+    'Metabolic active cells': ['EXOSC7', 'ACOT9', 'AC025754.2', 'ATP5ME', 'AFG3L2'],
+    'Secretory cells': ['PDIA6', 'ASPH', 'FOXJ1', 'OCIAD1', 'MTRNR2L12'],
+    'Cell cycle and proliferation cells': ['CDCA5', 'PIGK', 'ITSN1', 'AC015871.1', 'MAPK9']
+}
+
+# Get the intersecting genes between the dataset and canonical markers
+intersecting_genes = set(merged.var_names) & set([gene for genes in canonical_markers.values() for gene in genes])
+
+# Filter the dataset with the intersecting genes
+filtered_merged = merged[:, list(intersecting_genes)]
+
+# Plot the expression levels of known canonical markers
+sc.pl.dotplot(filtered_merged, groupby='Cell Type', var_names=list(intersecting_genes), color_map='Blues', save='_canonical_markers.png')
+
+
+import pandas as pd
+import scanpy as sc
+
+# Define the number of top differentially expressed genes to keep
+top_n_de_genes = 10
+
+# Calculate differential expression
+sc.tl.rank_genes_groups(merged, groupby='Cell Type', method='t-test_overestim_var')
+
+# Initialize an empty dictionary to store the results
+de_results = {}
+
+# Loop over each cell type and get the top differentially expressed genes
+for cell_type in merged.obs['Cell Type'].unique():
+    cell_type_marker_genes = pd.DataFrame(merged.uns['rank_genes_groups']['names'][cell_type])[:top_n_de_genes]
+    cell_type_marker_scores = pd.DataFrame(merged.uns['rank_genes_groups']['scores'][cell_type])[:top_n_de_genes]
+    cell_type_marker_pvals = pd.DataFrame(merged.uns['rank_genes_groups']['pvals_adj'][cell_type])[:top_n_de_genes]
+    
+    # Combine the marker genes, scores, and p-values into a single DataFrame
+    cell_type_de_results = pd.concat([cell_type_marker_genes, cell_type_marker_scores, cell_type_marker_pvals], axis=1)
+    cell_type_de_results.columns = ['Gene', 'Score', 'Adjusted P-value']
+    
+    # Save the results for the cell type in the dictionary
+    de_results[cell_type] = cell_type_de_results
+
+# Create a new DataFrame to combine the results for all cell types
+de_results_df = pd.concat(de_results, names=['Cell Type']).reset_index(level='Cell Type')
+
+# Save the DataFrame to the 'tables' folder
+de_results_df.to_csv('tables/differential_expression_results.csv', index=False)
+
+# View the DataFrame
+print(de_results_df)

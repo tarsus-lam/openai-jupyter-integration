@@ -1,0 +1,8 @@
+# ignore .env file
+.env
+
+# ignore ipynb checkpoints
+.ipynb_checkpoints
+
+# ignore python cache
+scAnalysis/__pycache__

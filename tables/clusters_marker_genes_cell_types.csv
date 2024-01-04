@@ -1,0 +1,7 @@
+Cluster,Marker Genes,Cell Type
+0,"BANF1, NUTF2, MRPL12, COA3, CCNI",Mitochondrial-associated cells
+1,"MALAT1, MT-ND1, AC127164.1, SHANK2-AS1, MRTFA-AS1",Long non-coding RNA expressing cells
+2,"ITGA9-AS1, GRINA, TCEA2, NAE1, SMS",Transcriptionally active cells
+3,"EXOSC7, ACOT9, AC025754.2, ATP5ME, AFG3L2",Metabolic active cells
+4,"PDIA6, ASPH, FOXJ1, OCIAD1, MTRNR2L12",Secretory cells
+5,"CDCA5, PIGK, ITSN1, AC015871.1, MAPK9",Cell cycle and proliferation cells
