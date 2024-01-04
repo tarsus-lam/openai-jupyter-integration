@@ -95,3 +95,6 @@ options:
 - The Jupyter Notebook openai_jupyter_integration.ipynb is not guaranteed to be reproducible as intended since GPT outputs may vary, providing different analysis methods each time.
 - To reproduce the analysis in this repository, please use main.py.
 - Note that the analysis is not comprehensive and has not undergone rigorous validation of the identified cell types. This project mainly serves as a demonstration of using OpenAI's API for bioinformatics analyses.
+
+## Author
+Tarsus Lam
