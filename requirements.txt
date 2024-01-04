@@ -1,0 +1,14 @@
+# Python and Jupyter Dependencies for OpenAI integration and scRNA-seq analysis
+- python v3.11.5
+- jupyter v7.0.6
+- leidenalg v0.10.1
+- openai v1.6.1
+- re v2.2.1
+- scanpy v1.9.6
+- numpy v1.26.3
+- pandas v2.1.4
+- matplotlib v3.8.2
+- seaborn v0.13.1
+- scipy v1.11.4
+- scikit-learn v1.3.2
+- scikit-misc v0.3.1
