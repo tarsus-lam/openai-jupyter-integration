@@ -87,7 +87,9 @@ options:
 ```
 
 ## Data Description
-The data is obtained from 10x Genomics and is stored in 'data/lung_control' and 'data/lung_treatment'. It comprises A549 lung carcinoma cells that expressed dCas9-KRAB and were transduced with a pool containing 93 total sgRNAs. The cells were obtained from 10x Genomics by MilliporeSigma. Selected cells for each condition were individually frozen, then thawed and counted for analysis.
+- The data were obtained from 10x Genomics and produce by CellRanger. It comprises A549 lung carcinoma cells that expressed dCas9-KRAB and were transduced with a pool containing 93 total sgRNAs. Selected cells for each condition were individually frozen, then thawed and counted for analysis.
+- The dataset can be obtained by searching `5k A549, Lung Carcinoma Cells, No Treatment Transduced with a CRISPR Pool` on the 10x Genomics website. The treatment sample `Gene Expression - Feature / cell matrix (raw)` is under the 'Inputs/Library' tab, and the control sample `Gene Expression - Feature / cell matrix (per-sample)` is under the 'No Treatment' tab.
+- Included in this repo are the corresponding HDF5 files, stored in the `data/lung_control` and `data/lung_treatment` folders.
 
 ## Disclaimers
 - The Jupyter Notebook openai_jupyter_integration.ipynb is not guaranteed to be reproducible as intended since GPT outputs may vary, providing different analysis methods each time.
